@@ -1,8 +1,11 @@
 const cors = require("cors");
+
 const express = require("express");
+
 const app = express();
+
 app.use(cors());
-app.use(express.json);
+app.use(express.json());
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
 
@@ -25,7 +28,7 @@ app.get("/", async (req, res) => {
 
 //Vieno producto gavimas
 
-app.get("/products/:id", async (req, res) => {
+app.get("/products/:brand", async (req, res) => {
   try {
     const con = await client.connect();
     const data = await con
@@ -41,5 +44,5 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = 8080;
 app.listen(port, () => console.log("Server is running on port " + port));
