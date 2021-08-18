@@ -4,6 +4,7 @@ const app = express();
 app.use(cors());
 app.use(express.json);
 const { MongoClient } = require("mongodb");
+require("dotenv").config();
 
 const URI =
   "mongodb+srv://edgariux998:edgaras123@cluster0.oekth.mongodb.net/demo5";
@@ -11,7 +12,7 @@ const client = new MongoClient(URI);
 
 //gauname visus produktus
 
-app.get("/products", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const con = await client.connect();
     const data = await con.db("demo5").collection("products").find().toArray();
@@ -24,7 +25,7 @@ app.get("/products", async (req, res) => {
 
 //Vieno producto gavimas
 
-app.get("/products/brand-:brand", async (req, res) => {
+app.get("/products/:id", async (req, res) => {
   try {
     const con = await client.connect();
     const data = await con
