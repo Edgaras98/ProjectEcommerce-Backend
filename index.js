@@ -30,13 +30,13 @@ app.get("/", async (req, res) => {
 
 //Vieno producto gavimas
 
-app.get("/products/:brand", async (req, res) => {
+app.get("/products/:_id", async (req, res) => {
   try {
     const con = await client.connect();
     const data = await con
       .db("demo5")
       .collection("products")
-      .find({ brand: req.params.brand })
+      .find({ id: req.params.id })
       .toArray();
     await con.close();
 
